@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home work #5</title>
+</head>
+<body>
+    <script>
+        // Задание №1
+//         class SimpleMarker {
+//     constructor(color, inkLevel = 100) {
+//     this.color = color;
+//     this.inkLevel = inkLevel;
+//   }
+
+//      print(text) {
+//      if (this.inkLevel > 0) {
+//       let printedText = "";
+//       for (let i = 0; i < text.length && this.inkLevel >= 0.5; i++) {
+//         if (text[i] !== "") {
+//           printedText += text[i];
+//           this.inkLevel -= 0.5;
+//         }
+//       }
+//       console.log(`%c${printedText}`, `color: ${this.color}`);
+//     } else {
+//       console.log("Маркер пуст!");
+//     }
+//   } 
+// }let simpleMarker = new SimpleMarker("red", 50);
+//     simpleMarker.print(`Привет, лунатикам!`)
+      
+// class RefillableMarker extends SimpleMarker {
+//   constructor(color, inkLevel = 100) {
+//     super(color, inkLevel);
+//   }
+
+//   refill() {
+//     this.inkLevel = 100;
+//     console.log("Маркер заправлен!");
+//   }
+// }  
+
+//     let refillableMarker = new RefillableMarker("blue");
+//     refillableMarker.print(`Земля в иллюминаторе видна...`);
+//     refillableMarker.refill();
+//     refillableMarker.print("Поехали!");
+
+
+        // Задание №2
+            // class MyDate {
+            // constructor(day, month, year) {
+            // this.day = day;
+            // this.month = month;
+            // this.year = year;
+            // }
+
+            // showTime() {
+            // return `${this.day}. ${this.month}. ${this.year}`;
+            // }
+            // }
+            // const today = new Date("01/02/2023");
+            // const myDate = new MyDate(today.getDate(), today.getMonth() + 1, today.getFullYear()); // Создаем объект MyDate с текущей датой
+            // console.log(myDate.showTime());
+
+            // class ExtendedDate extends MyDate{
+            //     constructor(day,month,year){
+            //         super(day,month,year)
+            //     }
+            // showDateText(){
+            //     const monthNames = [
+            //     "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+            //     "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+            //     ];
+            //     const monthIndex = this.month - 1;
+            //     return `${this.day} ${monthNames[monthIndex]}`;
+            // } 
+            // //  const extendedDate1 = new ExtendedDate(today.getDate(), today.getMonth());
+            // //     console.log(extendedDate1.showDateText());
+
+            // showValueDate(){
+                // const inputDate = new Date("2027-01-01");
+                // const currentDate = new Date();
+
+                // if(inputDate<currentDate){
+                //     return false;
+                   
+                // } else{
+                //     return true;
+                   
+                // }
+              
+               
+        //         if((this.year % 100 !== 0 && this.year % 4 === 0) || (this.year % 400 === 0)){
+        //             return `Год ${this.year} високосный`
+        //     } else{
+        //             return `Год ${this.year} не високосный`
+        
+                // const tomorrow = new Date(this.year, this.month - 1, this.day + 1);
+                // return `${tomorrow}`;
+                // }
+                // }
+
+                // const extendedDate2 = new ExtendedDate(today.getDate(), today.getMonth() + 1, today.getFullYear());
+                // console.log(extendedDate2.showValueDate());
+               
+                // Задание №3
+                
+            class Employee {
+            constructor(name, age, position) {
+            this.name = name;
+            this.age = age;
+            this.position = position;
+    }
+
+    static getArrEmployee() {
+        return [
+            {name : 'Иван Иванов', age : '50 лет', position : 'Старший менеджер'},
+            {name : 'Петр Петров', age : '45 лет', position : 'Младший менеджер'},
+            {name : 'Семен Семенов', age : '30 лет', position : 'Операционист'}
+        ];
+    }
+}
+
+        class EmpTable {
+        constructor(employees) {
+        this.employees = employees;
+    }
+
+        getHtml() {
+        let html = `<table border="1">
+                        <tr>
+                            <th>Имя</th>
+                            <th>Возраст</th>
+                            <th>Должность</th>
+                        </tr>`;
+        
+        this.employees.forEach(employee => {
+            html += `<tr>
+                        <td>${employee.name}</td>
+                        <td>${employee.age}</td>
+                        <td>${employee.position}</td>
+                    </tr>`;
+        });
+
+        html += `</table>`;
+        return html;
+    }
+}
+
+const employees = Employee.getArrEmployee();
+
+const empTable = new EmpTable(employees);
+
+const tableHtml = empTable.getHtml();
+// document.write(tableHtml);
+
+//Задание №4
+
+class StyledEmpTable extends EmpTable {
+    
+    getStyles() {
+        return `
+            <style>
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    padding: 10px;
+                    text-align: left;
+                    border: 1px solid #000;
+                }
+                th {
+                    background-color: #f2f2f2;
+                }
+                tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+                tr:hover {
+                    background-color: #ddd;
+                }
+            </style>
+        `;
+    }
+
+   
+    getHtml() {
+        return this.getStyles() + super.getHtml();
+    }
+}
+
+const styledEmpTable = new StyledEmpTable(employees);
+
+const styledTableHtml = styledEmpTable.getHtml();
+
+document.write(styledTableHtml);
+   </script>
+               
+                           
+
+    
+</body>
+</html>
